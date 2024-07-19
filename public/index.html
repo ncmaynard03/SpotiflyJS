@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Spotify Auth</title>
+    <link href="app.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <div class="App-header">
+      <h1>SpotiFly</h1>
+      <div id="auth-section">
+        <button id="login-button" class="button">Login to Spotify</button>
+        <button id="logout-button" class="button" disabled>Logout</button>
+      </div>
+    </div>
+
+    <div id="context-menu">
+      <ul></ul>
+    </div><div id="content-section">
+      <div class="artists-container">
+        <h2>Saved Artists</h2>
+        <div class="filter-menu">
+          <p>Sort by:</p>
+          <button id="artists-sort-button">Name</button>
+          <p>Reversed</p>
+          <input type="checkbox" id="artists-reversed" />
+        </div>
+        <div id="artists-list" class="artists-list"></div>
+      </div>
+
+      <div class="albums-container">
+        <h2>Saved Albums</h2>
+        <!-- <div class="filter-menu"></div> -->
+        <div id="albums-list" class="albums-list"></div>
+      </div>
+
+      <div class="tracks-container">
+        <h2>Saved tracks</h2>
+        <!-- <div class="filter-menu">
+          <p>Sort by:</p>
+          <button id="artists-sort-button">Name</button>
+          <p>Reversed</p>
+          <input type="checkbox" id="artists-reversed" />
+        </div> -->
+        <div id="tracks-list" class="tracks-list"></div>
+      </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="./library.js"></script>
+    <script src="./apiInterface.js"></script>
+    <script src="./filter.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>

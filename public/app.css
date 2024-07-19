@@ -1,0 +1,168 @@
+.App-header {
+  display: flex;
+  justify-content: space-between; /* Aligns children (h1 and div) on opposite ends */
+  align-items: center; /* Centers children vertically in the header */
+  padding: 10px 20px; /* Adds some padding around the header */
+  position: relative;
+  background-color: hsl(220, 13%, 13%);
+  margin: 0;
+  box-shadow: 0px 3px 5px black;
+}
+
+h1,
+h2 {
+  color: white;
+  margin: 0 auto; /* Centers the h1 horizontally in the available space */
+}
+
+.App-header .auth-links {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+}
+
+body {
+  background-color: hsl(220, 13%, 18%);
+  font-family: Arial, sans-serif;
+  padding: 0;
+  margin: 0;
+}
+
+#auth-section,
+#content-section {
+  margin: 20px;
+}
+
+#content-section {
+  display: flex;
+}
+
+.button {
+  padding: 10px 20px;
+  background-color: #1db954;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.button:disabled {
+  background-color: #ccc;
+}
+
+
+.filter-menu {
+  display: flex;
+  background: grey;
+  padding: 5px;
+  align-items: center;
+}
+
+.filter-menu button{
+  height:fit-content;
+  font-size: medium;
+}
+
+.filter-menu p{
+  margin: 5px;
+}
+
+
+.artists-container, .albums-container, .tracks-container {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 10px;
+  width: 30%;
+  margin: 20px;
+}
+
+.albums-list, .artists-list, .tracks-list  {
+  overflow-y: scroll;
+  max-height: 70vh;
+
+}
+
+
+.artist p, .album p, .track p {
+  margin: 0; 
+  color: white;
+}
+
+.album button {
+  width: 50%;
+}
+
+
+.artist, .album, .track {
+  display: grid;
+  grid-template-columns: auto 1fr 33%; /* Three columns: image, info, buttons */
+  gap: 5px; /* Space between columns */
+  align-items: center;
+  padding: 5px;
+  width: 100%; /* Ensure each item takes the full width of the parent */
+  border: 3px solid #ccc0;
+  /* background-color: #f9f9f9; */
+  margin-bottom: 10px; /* Space between rows */
+  box-sizing: border-box;
+}
+
+/* Optional: Style selected items */
+.selected {
+  border: 3px solid rgb(0, 255, 47);
+  
+}
+
+.artist{
+  grid-template-columns: auto auto;
+}
+
+.album img, .track img {
+  width: 50px; /* Or appropriate size for your design */
+  height: 50px;
+  object-fit: cover;
+}
+
+.album img {
+  width: 70px;
+  height: 70px;
+}
+
+/* Item content areas */
+.artist-info, .album-info, .track-info {
+  overflow: hidden; /* Hide overflow content */
+  text-overflow: ellipsis; /* Add ellipsis for overflowing text */
+  white-space: nowrap; /* Prevent text from wrapping */
+}
+
+.artist-stats, .album-buttons, .track-buttons {
+  text-align: right; /* Align buttons and stats to the right */
+  margin-top: 5px; /* Space between buttons/stats */
+  margin-bottom: 5px;
+}
+
+.artist:hover, .album:hover, .track:hover {
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); /* Enhanced shadow when hovered */
+}
+
+
+#context-menu {
+  display: none;
+  position: absolute;
+  background-color: white;
+  border: 1px solid #ccc;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+}
+#context-menu ul {
+  list-style-type: none;
+  padding: 10px;
+  margin: 0;
+}
+#context-menu li {
+  padding: 8px 12px;
+  cursor: pointer;
+}
+#context-menu li:hover {
+  background-color: #eee;
+}
