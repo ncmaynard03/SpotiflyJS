@@ -1,4 +1,4 @@
-class Filter {
+export default class Filter {
   constructor(library) {
     this.library = library;
     this.albums = null;

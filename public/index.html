@@ -9,10 +9,6 @@
   <body>
     <div class="App-header">
       <h1>SpotiFly</h1>
-      <div id="auth-section">
-        <button id="login-button" class="button">Login to Spotify</button>
-        <button id="logout-button" class="button" disabled>Logout</button>
-      </div>
     </div>
 
     <div id="context-menu">
@@ -46,10 +42,11 @@
         <div id="tracks-list" class="tracks-list"></div>
       </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="./library.js"></script>
-    <script src="./apiInterface.js"></script>
-    <script src="./filter.js"></script>
-    <script src="app.js"></script>
+    <script type="module" src="./library.js"></script>
+    <script type="module" src="./apiInterface.js"></script>
+    <script type="module" src="./filter.js"></script>
+    <script type="module" serc="./dbManager.js"></script>
+    <script type="module" src="./app.js"></script>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   </body>
 </html>

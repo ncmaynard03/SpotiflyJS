@@ -1,91 +1,81 @@
-class ApiInterface {
-  constructor(token, library) {
+export default class ApiInterface {
+  
+  constructor(token) {
     this.token = token;
-    this.library = library;
-    library.pullAlbumFunction = this.fetchAlbumFromSpotify.bind(this);
-    this.albumJson = [];
-    this.trackJson = [];
   }
 
   getToken() {
     return this.token;
   }
 
-  async fetchFromSpotify() {
-    var albumFetchLimit = -1; //number of calls made for albums and tracks
-    var trackFetchLimit = -3; //number of calls made for albums and tracks
-    // Clear existing album and track data
-    this.albumJson = [];
-    this.trackJson = [];
-
-    // Fetch albums from Spotify
+  async fetchAlbums(){
+    let pages = 0;
+    let maxPages = 2;
     let fetchUrl = "https://api.spotify.com/v1/me/albums";
 
+    let albums = [];
     while (fetchUrl) {
       try {
         const response = await axios.get(fetchUrl, {
           headers: {
             Authorization: `Bearer ${this.getToken()}`,
           },
-          params: {
+          params: {  
             limit: 50,
           },
         });
 
         const { items, next } = response.data;
-        items.forEach((item) => {
-          this.library.addAlbum(item.album, true);
-        });
-
         fetchUrl = next;
 
-        //limits albums for testing/dev
-        if (albumFetchLimit > -1) {
-          if (albumFetchLimit == 0) {
-            fetchUrl = null;
-          }
-          albumFetchLimit -= 1;
-        }
+        albums.push(...items);
+        
+        if(pages++ < maxPages && maxPages > 0) {
+          break;
+        };
+
       } catch (error) {
         console.error("Failed to fetch albums:", error);
         break;
       }
     }
-    console.log("Pulled albums from Spotify");
+    console.log(`Pulled ${pages} album pages from Spotify`);
+    return albums;
+  }
 
-    // Fetch tracks from Spotify
-    fetchUrl = "https://api.spotify.com/v1/me/tracks";
+  async fetchTracks(){
+    pages = 0;
+    maxPages = 2;
+    let fetchUrl = "https://api.spotify.com/v1/me/tracks";
+
+    let tracks = [];
     while (fetchUrl) {
       try {
         const response = await axios.get(fetchUrl, {
           headers: {
             Authorization: `Bearer ${this.getToken()}`,
           },
-          params: {
+          params: {  
             limit: 50,
           },
         });
 
         const { items, next } = response.data;
-        items.forEach((item) => {
-          this.library.addTrack(item.track, true);
-        });
-
         fetchUrl = next;
 
-        //limits albums for testing/dev
-        if (trackFetchLimit > -1) {
-          if (trackFetchLimit == 0) {
-            fetchUrl = null;
-          }
-          trackFetchLimit -= 1;
-        }
+        tracks.push(...items);
+        
+        if(pages++ < maxPages && maxPages > 0) {
+          break;
+        };
+
       } catch (error) {
         console.error("Failed to fetch tracks:", error);
         break;
       }
     }
-    console.log("Pulled tracks from Spotify");
+    console.log(`Pulled ${pages} track pages from Spotify`);
+    return tracks;
   }
 
   async fetchAlbumFromSpotify(albumId) {
